@@ -56,6 +56,17 @@
             app:argType="string" />
 
 
+        <argument
+            android:name="trainerFullName"
+            app:argType="string" />
+
+
+        <argument
+            android:name="trainerProfilePicture"
+            app:argType="string" />
+
+
+
     </fragment>
 
 

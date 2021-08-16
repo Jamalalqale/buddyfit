@@ -4,16 +4,19 @@ package com.jamal.workoutclasses
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 
 class ClassAdapter(private val mContacts: List<ClassItems>) : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val class_name = itemView.findViewById<TextView>(R.id.class_name)
         val classlayout = itemView.findViewById<LinearLayout>(R.id.classlayout)
+        val backgraounImage = itemView.findViewById<ImageView>(R.id.backgraounImage)
 
 
     }
@@ -23,17 +26,21 @@ class ClassAdapter(private val mContacts: List<ClassItems>) : RecyclerView.Adapt
 
         val context = parent.context
         val inflater = LayoutInflater.from(context)
-        val contactView = inflater.inflate(R.layout.recyclerview_adapter, parent, false)
-        return ViewHolder(contactView)
+        val classtView = inflater.inflate(R.layout.recyclerview_adapter, parent, false)
+        return ViewHolder(classtView)
     }
 
 
     override fun onBindViewHolder(viewHolder: ClassAdapter.ViewHolder, position: Int) {
 
-        val contact: ClassItems = mContacts.get(position)
+        val classItems: ClassItems = mContacts.get(position)
         val class_name = viewHolder.class_name
-        class_name.setText(contact.className)
         val classlayout = viewHolder.classlayout
+        val backgraounImage = viewHolder.backgraounImage
+
+        class_name.setText(classItems.className)
+        Picasso.get().load(classItems.picture).into(backgraounImage);
+
 
 
 
@@ -43,7 +50,15 @@ class ClassAdapter(private val mContacts: List<ClassItems>) : RecyclerView.Adapt
             viewHolder.apply {
                 with(viewHolder.itemView) {
 
-                    val action = ListFragmentDirections.actionListFragmentToDetailsFragment(contact.className, contact.startsAt, contact.endsAt, contact.duration, contact.lang, contact.category, contact.picture)
+                    val action = ListFragmentDirections.actionListFragmentToDetailsFragment(classItems.className,
+                            classItems.startsAt,
+                            classItems.endsAt,
+                            classItems.duration,
+                            classItems.lang,
+                            classItems.category,
+                            classItems.picture,
+                            classItems.trainerFullName,
+                            classItems.trainerProfilePicture)
                     findNavController().navigate(action)
 
 

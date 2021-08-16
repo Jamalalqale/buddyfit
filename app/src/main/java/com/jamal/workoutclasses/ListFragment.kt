@@ -65,7 +65,14 @@ class ListFragment : Fragment(R.layout.listfragmet_layout) {
                     val picture = attributes.getString("listPictureUrl")
 
 
-                    classitem.add(i, ClassItems(className, startsAt, endsAt, duration, language, category, picture))
+
+                    val trainerInfo = jsonArray.getJSONObject(i).getJSONObject("relationships").getJSONObject("trainer").getJSONObject("attributes")
+                    val trainerFullName = trainerInfo.getString("fullName")
+                    val trainerProfilePicture = trainerInfo.getString("profilePicture")
+
+
+
+                    classitem.add(i, ClassItems(className, startsAt, endsAt, duration, language, category, picture,trainerFullName,trainerProfilePicture))
                     classadapter?.notifyItemInserted(i)
 
                 }

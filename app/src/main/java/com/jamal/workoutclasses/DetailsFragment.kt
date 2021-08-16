@@ -19,6 +19,8 @@ class DetailsFragment : Fragment(R.layout.detailsfragment_layout) {
     private lateinit var lang: TextView
     private lateinit var category: TextView
     private lateinit var picture: ImageView
+    private lateinit var trainerFullName: TextView
+    private lateinit var trainerProfilePicture: ImageView
 
     private val args: DetailsFragmentArgs by navArgs()
 
@@ -33,6 +35,8 @@ class DetailsFragment : Fragment(R.layout.detailsfragment_layout) {
         val lang: TextView = view.findViewById(R.id.lang)
         val category: TextView = view.findViewById(R.id.category)
         val picture: ImageView = view.findViewById(R.id.picture)
+        val trainerFullName: TextView = view.findViewById(R.id.trainerFullName)
+        val trainerProfilePicture: ImageView = view.findViewById(R.id.trainerProfilePicture)
 
         Picasso.get().load(args.picture).into(picture);
 
@@ -42,6 +46,9 @@ class DetailsFragment : Fragment(R.layout.detailsfragment_layout) {
         duration.text = args.duration
         lang.text = args.lang
         category.text = args.category
+
+        Picasso.get().load(args.trainerProfilePicture).into(trainerProfilePicture);
+        trainerFullName.text = args.trainerFullName
 
 
     }
